@@ -2,9 +2,9 @@ import type {Matcher} from 'anymatch';
 import type {AwaitWriteFinishOptions, WatchOptions} from 'chokidar';
 import type {Writable} from 'stream';
 import type {AcceptedPlugin, ProcessOptions, SourceMapOptions} from 'postcss';
-import type {IPluginOptions} from '../postcssPlugin/types';
+import type {PluginOptions} from '../postcssPlugin/types';
 
-export interface ISessionOptions {
+export interface SessionOptions {
     /**
      * Pattern(s) to be included
      * @default "*"
@@ -68,7 +68,7 @@ export interface ISessionOptions {
     /**
      * Parameters for esifycss.plugin.
      */
-    esifycssPluginParameter?: IPluginOptions,
+    esifycssPluginParameter?: PluginOptions,
     /**
      * A stream where the runner outputs logs.
      * @default process.stdout
@@ -81,21 +81,21 @@ export interface ISessionOptions {
     stderr?: Writable,
 }
 
-export interface IReadonlyWatchOptions extends Readonly<WatchOptions> {
+export interface ReadonlyWatchOptions extends Readonly<WatchOptions> {
     awaitWriteFinish?: Readonly<AwaitWriteFinishOptions> | boolean,
 }
 
-export interface ISessionOutput {
+export interface SessionOutput {
     type: 'css' | 'script',
     path: string,
 }
 
-export interface ISessionConfiguration {
+export interface SessionConfiguration {
     readonly watch: boolean,
-    readonly output: ISessionOutput,
+    readonly output: SessionOutput,
     readonly ext: string,
     readonly path: ReadonlyArray<string>,
-    readonly chokidar: IReadonlyWatchOptions,
+    readonly chokidar: ReadonlyWatchOptions,
     readonly stdout: Writable,
     readonly stderr: Writable,
     readonly postcssPlugins: Array<AcceptedPlugin>,
@@ -103,7 +103,7 @@ export interface ISessionConfiguration {
     readonly cssKey: string,
 }
 
-export interface ICSSParserParameters {
+export interface CSSParserParameters {
     file: string,
     css?: Buffer | string,
     options?: ProcessOptions,
@@ -111,7 +111,7 @@ export interface ICSSParserParameters {
     map?: SourceMapOptions,
 }
 
-export interface ICSSParserConfigurations {
+export interface CSSParserConfigurations {
     readonly css: string,
     readonly plugins: Array<AcceptedPlugin>,
     readonly options: {

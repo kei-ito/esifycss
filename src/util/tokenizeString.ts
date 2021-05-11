@@ -2,9 +2,7 @@
  * Splits the input string for minifying CSS strings.
  * If the input is "width:100px", the output will be "width" ":" "100" "px"
  */
-export const tokenizeString = function* (
-    string: string,
-): IterableIterator<string> {
+export const tokenizeString = function* (string: string): Generator<string> {
     let pos = 0;
     const REGEXP = /[.0-9]+|[^a-zA-Z]/g;
     while (1) {

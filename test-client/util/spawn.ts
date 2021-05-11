@@ -1,9 +1,15 @@
 import * as childProcess from 'child_process';
-import type {ISpawnParameters} from './types';
+import type * as stream from 'stream';
 
-export const spawn = async (
-    parameters: ISpawnParameters,
-): Promise<void> => {
+interface SpawnParameters {
+    command: string,
+    args?: Array<string>,
+    options?: childProcess.SpawnOptionsWithoutStdio,
+    stdout?: stream.Writable,
+    stderr?: stream.Writable,
+}
+
+export const spawn = async (parameters: SpawnParameters): Promise<void> => {
     await new Promise<void>((resolve, reject) => {
         const subProcess = childProcess.spawn(
             parameters.command,

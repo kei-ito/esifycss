@@ -10,12 +10,12 @@ import {runCode} from '../util/runCode.for-test';
 import {writeFilep} from '../util/writeFilep';
 const {readFile} = fs.promises;
 
-interface ITestContext {
+interface TestContext {
     directory: string,
     session?: Session,
 }
 
-const test = anyTest as TestInterface<ITestContext>;
+const test = anyTest as TestInterface<TestContext>;
 const isRule = (input: postcss.ChildNode): input is postcss.Rule => input.type === 'rule';
 
 test.beforeEach(async (t) => {

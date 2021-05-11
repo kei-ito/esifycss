@@ -1,6 +1,6 @@
 import * as path from 'path';
 import type * as acorn from 'acorn';
-import type {IImportDeclaration, IVariableDeclaration, IFunctionDeclaration} from './walker';
+import type {ImportDeclaration, VariableDeclaration, FunctionDeclaration} from './walker';
 import {isProgramNode} from './ast';
 
 export const normalizeHelperId = (
@@ -11,7 +11,7 @@ export const findAddStyleImport = (
     ast: acorn.Node,
     helperId: string,
     localName?: string,
-): {name: string, node: IFunctionDeclaration | IImportDeclaration | IVariableDeclaration} => {
+): {name: string, node: FunctionDeclaration | ImportDeclaration | VariableDeclaration} => {
     if (!isProgramNode(ast)) {
         throw new Error('InvalidNode');
     }

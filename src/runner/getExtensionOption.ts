@@ -1,9 +1,9 @@
 import * as path from 'path';
-import type {ISessionConfiguration} from './types';
+import type {SessionConfiguration} from './types';
 
 export const getExtensionOption = (
     parameters: {ext?: string},
-    output: ISessionConfiguration['output'],
+    output: SessionConfiguration['output'],
 ): string => {
     let {ext} = parameters;
     if (!ext) {

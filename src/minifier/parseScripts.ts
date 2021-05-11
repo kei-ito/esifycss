@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import type {IParseScriptsResult, IScriptData} from './types';
+import type {ParseScriptsResult, ScriptData} from './types';
 import {parseCSSModuleScript} from './parseCSSModuleScript';
 import {tokenizeString} from '../util/tokenizeString';
 const {readFile} = fs.promises;
@@ -9,8 +9,8 @@ export const parseScripts = async (
         files: Array<string>,
         cssKey: string,
     },
-): Promise<IParseScriptsResult> => {
-    const scripts = new Map<string, IScriptData>();
+): Promise<ParseScriptsResult> => {
+    const scripts = new Map<string, ScriptData>();
     const tokens = new Map<string, number>();
     await Promise.all(files.map(async (file) => {
         const code = await readFile(file, 'utf8');

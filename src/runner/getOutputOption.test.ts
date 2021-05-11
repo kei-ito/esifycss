@@ -1,7 +1,7 @@
 import test from 'ava';
 import {getOutputOption} from './getOutputOption';
 
-interface ITest {
+interface Test {
     input: Parameters<typeof getOutputOption>,
     expected: ReturnType<typeof getOutputOption> | null,
 }
@@ -27,7 +27,7 @@ interface ITest {
         input: [{css: 'output.css', helper: 'output.js'}, ['a']],
         expected: null,
     },
-] as Array<ITest>).forEach(({input, expected}, index) => {
+] as Array<Test>).forEach(({input, expected}, index) => {
     test(`#${index} ${JSON.stringify(input)} → ${expected ? JSON.stringify(expected) : 'Error'}`, (t) => {
         if (expected) {
             t.deepEqual(getOutputOption(...input), expected);

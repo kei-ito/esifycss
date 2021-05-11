@@ -1,6 +1,6 @@
-import type {IIdentifier} from '../util/createIdentifier';
+import type {IdGenerator} from '../util/createIdGenerator';
 
-export interface IPluginOptions {
+export interface PluginOptions {
     /**
      * When it is true, this plugin minifies classnames.
      * @default true
@@ -13,7 +13,7 @@ export interface IPluginOptions {
      * of mangled outputs.
      * @default esifycss.createIdentifier()
      */
-    identifier?: IIdentifier,
+    identifier?: IdGenerator,
     /**
      * Names starts with this value are not passed to mangler but replaced with
      * unprefixed names.
@@ -34,10 +34,10 @@ export interface IPluginOptions {
      * overwritten unexpectedly.
      * @default undefined
      */
-    mangler?: IPluginMangler,
+    mangler?: PluginMangler,
 }
 
-export interface IPluginMangler {
+export interface PluginMangler {
     (
         id: string,
         type: string,
@@ -45,17 +45,17 @@ export interface IPluginMangler {
     ): string,
 }
 
-export interface IPluginConfiguration {
-    readonly mangler: IPluginMangler,
+export interface PluginConfiguration {
+    readonly mangler: PluginMangler,
     readonly rawPrefix: string,
 }
 
-export type IIdentifierMap = Record<string, string | undefined>;
+export type IdentifierMap = Record<string, string | undefined>;
 
-export interface IEsifyCSSResult {
-    className: IIdentifierMap,
-    id: IIdentifierMap,
-    keyframes: IIdentifierMap,
+export interface EsifyCSSResult {
+    className: IdentifierMap,
+    id: IdentifierMap,
+    keyframes: IdentifierMap,
 }
 
-export interface IImports extends Map<string, string> {}
+export interface Imports extends Map<string, string> {}

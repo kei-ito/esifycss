@@ -1,13 +1,13 @@
 type Resolve = () => void;
 type Reject = (error: Error) => void;
 
-export interface IExposedPromise {
+export interface ExposedPromise {
     readonly promise: Promise<void>,
     readonly resolve: Resolve,
     readonly reject: Reject,
 }
 
-export const createExposedPromise = (): IExposedPromise => {
+export const createExposedPromise = (): ExposedPromise => {
     let resolve: Resolve | null = null;
     let reject: Reject | null = null;
     const promise = new Promise<void>((res, rej) => {

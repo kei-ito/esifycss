@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import type {ISessionOptions} from '../runner/types.js';
+import type {SessionOptions} from '../runner/types.js';
 const {readFile} = fs.promises;
 
 interface EsifyCSSCommandOptions {
@@ -17,8 +17,8 @@ export const loadParameters = async (
     include: Array<string>,
     args: EsifyCSSCommandOptions,
     directory: string = process.cwd(),
-): Promise<ISessionOptions> => {
-    const parameters: Partial<ISessionOptions> = {
+): Promise<SessionOptions> => {
+    const parameters: Partial<SessionOptions> = {
         include,
         helper: args.helper,
         css: args.css,
@@ -32,7 +32,7 @@ export const loadParameters = async (
     if (args.config) {
         const configPath = path.isAbsolute(args.config) ? args.config : path.join(directory, args.config);
         const configJSON = await readFile(configPath, 'utf8');
-        Object.assign(parameters, JSON.parse(configJSON) as ISessionOptions);
+        Object.assign(parameters, JSON.parse(configJSON) as SessionOptions);
     }
     return parameters;
 };

@@ -24,27 +24,30 @@
     },
     "scripts": {
         "lint": "eslint --ext .ts src scripts @types test-client",
+        "build": "run-s build:*",
         "build:cleanup": "rimraf lib src/helper/*.js",
-        "build:helper:cleanup": "rimraf lib/helper",
-        "build:helper:tsc": "tsc --project tsconfig.helper.json",
-        "build:helper:copy1": "ts-node scripts/copy ./src/helper ./lib/helper",
-        "build:helper:copy2": "ts-node scripts/copy ./lib/helper ./src/helper",
-        "build:helper": "run-s build:helper:cleanup build:helper:copy1 build:helper:tsc build:helper:copy2",
-        "build:tsc": "tsc",
+        "build:index": "npx indexen --input src --exclude '**/bin/*' --exclude '**/helper/*' --exclude '*.test.*' --exclude '*.d.ts' --output src/index.ts",
+        "build:tsc": "tsc --project tsconfig.build.json",
         "build:dts": "ts-node scripts/copy ./src/minifier/walker.d.ts ./lib/minifier/walker.d.ts",
+        "build:helper": "run-s build:helper:*",
+        "build:helper:cleanup": "rimraf lib/helper",
+        "build:helper:copy1": "ts-node scripts/copy ./src/helper ./lib/helper",
+        "build:helper:tsc": "tsc --project tsconfig.helper.json",
+        "build:helper:copy2": "ts-node scripts/copy ./lib/helper ./src/helper",
         "build:bin": "ts-node scripts/chmodScripts.ts",
+        "build:sample1": "run-s build:sample1:*",
         "build:sample1:cleanup": "rimraf sample/01-mangle",
         "build:sample1:copy": "ts-node scripts/copy sample/00-src sample/01-mangle",
         "build:sample1:esifycss": "node ./lib/bin/esifycss.js --helper sample/01-mangle/helper.js 'sample/01-mangle/**/*.css'",
-        "build:sample1": "run-s build:sample1:cleanup build:sample1:copy build:sample1:esifycss",
+        "build:sample2": "run-s build:sample2:*",
         "build:sample2:cleanup": "rimraf sample/02-no-mangle",
         "build:sample2:copy": "ts-node scripts/copy sample/00-src sample/02-no-mangle",
         "build:sample2:esifycss": "node ./lib/bin/esifycss.js --noMangle --helper sample/02-no-mangle/helper.js 'sample/02-no-mangle/**/*.css'",
-        "build:sample2": "run-s build:sample2:cleanup build:sample2:copy build:sample2:esifycss",
-        "build": "run-s build:cleanup build:tsc build:dts build:helper build:bin build:sample*",
-        "test": "ava --config ava.config.lib.cjs",
+        "test": "run-s test:*",
+        "test:type": "tsc --noEmit",
+        "test:ava": "ava --config ava.config.lib.cjs",
         "test-client": "ava --config ava.config.client.cjs",
-        "version": "run-s version:changelog version:add",
+        "version": "run-s version:*",
         "version:changelog": "nlib-changelog --output CHANGELOG.md",
         "version:add": "git add ."
     },
@@ -74,8 +77,8 @@
         "@typescript-eslint/parser": "4.22.1",
         "ava": "3.15.0",
         "browserstack-local": "1.4.8",
-        "eslint": "7.25.0",
-        "lint-staged": "10.5.4",
+        "eslint": "7.26.0",
+        "lint-staged": "11.0.0",
         "node-fetch": "2.6.1",
         "npm-run-all": "4.1.5",
         "postcss-scss": "3.0.5",
@@ -105,20 +108,9 @@
                 "files": [
                     "scripts/*.ts"
                 ],
-                "parserOptions": {
-                    "project": "./tsconfig.base.json"
-                },
                 "rules": {
                     "no-bitwise": "off",
                     "no-console": "off"
-                }
-            },
-            {
-                "files": [
-                    "@types/**/*.ts"
-                ],
-                "parserOptions": {
-                    "project": "./tsconfig.base.json"
                 }
             },
             {
@@ -136,9 +128,6 @@
                     "@typescript-eslint/no-floating-promises": "off",
                     "@typescript-eslint/no-unnecessary-condition": "off",
                     "@typescript-eslint/triple-slash-reference": "off"
-                },
-                "parserOptions": {
-                    "project": "./tsconfig.base.json"
                 }
             },
             {
@@ -147,9 +136,6 @@
                 ],
                 "rules": {
                     "no-bitwise": "off"
-                },
-                "parserOptions": {
-                    "project": "./tsconfig.helper.json"
                 }
             },
             {

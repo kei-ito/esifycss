@@ -1,22 +1,22 @@
-export interface IRange {
+export interface Range {
     start: number,
     end: number,
 }
 
-export interface ICSSRange extends IRange {
+export interface CSSRange extends Range {
     css: string,
 }
 
-export interface IParseResult {
-    ranges: Array<ICSSRange>,
-    statements: Array<IRange>,
+export interface ParseResult {
+    ranges: Array<CSSRange>,
+    statements: Array<Range>,
 }
 
-export interface IScriptData extends IParseResult {
+export interface ScriptData extends ParseResult {
     script: string,
 }
 
-export interface IParseScriptsResult {
-    scripts: Map<string, IScriptData>,
+export interface ParseScriptsResult {
+    scripts: Map<string, ScriptData>,
     tokens: Map<string, number>,
 }

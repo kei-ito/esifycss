@@ -1,12 +1,12 @@
-import type {INode} from './walker';
+import type {Node} from './walker';
 import {isArrayExpression, isObjectExpression} from './ast';
-import type {ICSSRange} from './types';
+import type {CSSRange} from './types';
 
 export const extractCSSFromArrayExpression = (
-    node: INode,
+    node: Node,
     cssKey: string,
-): Array<ICSSRange> => {
-    const result: Array<ICSSRange> = [];
+): Array<CSSRange> => {
+    const result: Array<CSSRange> = [];
     if (isArrayExpression(node)) {
         for (const item of node.elements) {
             if (isObjectExpression(item)) {

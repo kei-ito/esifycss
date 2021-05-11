@@ -1,14 +1,14 @@
 import type * as postcss from 'postcss';
 import * as parser from '@hookun/parse-animation-shorthand';
-import type {IEsifyCSSResult, IImports, IPluginMangler} from './types';
+import type {EsifyCSSResult, Imports, PluginMangler} from './types';
 import {getMatchedImport} from './getMatchedImport';
 
 export const transformDeclarations = (
     {root, transformResult, mangler, imports, rawPrefix}: {
         root: postcss.Root,
-        transformResult: IEsifyCSSResult,
-        mangler: IPluginMangler,
-        imports: IImports,
+        transformResult: EsifyCSSResult,
+        mangler: PluginMangler,
+        imports: Imports,
         rawPrefix: string,
     },
 ): void => {

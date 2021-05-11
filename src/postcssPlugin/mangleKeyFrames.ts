@@ -1,17 +1,17 @@
 import type * as postcss from 'postcss';
-import type {IEsifyCSSResult, IImports, IPluginMangler} from './types';
+import type {EsifyCSSResult, Imports, PluginMangler} from './types';
 import {getMatchedImport} from './getMatchedImport';
 
 export const mangleKeyFrames = (
     {id, root, mangler, imports, rawPrefix}: {
         id: string,
         root: postcss.Root,
-        mangler: IPluginMangler,
-        imports: IImports,
+        mangler: PluginMangler,
+        imports: Imports,
         rawPrefix: string,
     },
-): IEsifyCSSResult['keyframes'] => {
-    const keyframes: IEsifyCSSResult['keyframes'] = {};
+): EsifyCSSResult['keyframes'] => {
+    const keyframes: EsifyCSSResult['keyframes'] = {};
     root.walkAtRules((rule) => {
         const {name} = rule;
         if (name === 'keyframes') {

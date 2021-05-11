@@ -13,12 +13,12 @@ import {deleteFile} from '../util/deleteFile';
 import {writeFilep} from '../util/writeFilep';
 const {stat} = fs.promises;
 
-interface ITestContext {
+interface TestContext {
     directory: string,
     session?: Session,
 }
 
-const test = anyTest as TestInterface<ITestContext>;
+const test = anyTest as TestInterface<TestContext>;
 
 test.beforeEach(async (t) => {
     t.context.directory = await createTemporaryDirectory();

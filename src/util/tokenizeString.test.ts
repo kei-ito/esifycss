@@ -1,7 +1,7 @@
-import test from 'ava';
+import ava from 'ava';
 import {tokenizeString} from './tokenizeString';
 
-interface ITest {
+interface Test {
     input: string,
     expected: Array<string>,
 }
@@ -9,8 +9,8 @@ interface ITest {
 ([
     {input: 'foo', expected: ['foo']},
     {input: 'width:100px', expected: ['width', ':', '100', 'px']},
-] as Array<ITest>).forEach(({input, expected}, index) => {
-    test(`#${index} ${JSON.stringify(input)} → ${expected.join('|')}`, (t) => {
+] as Array<Test>).forEach(({input, expected}, index) => {
+    ava(`#${index} ${JSON.stringify(input)} → ${expected.join('|')}`, (t) => {
         t.deepEqual(
             [...tokenizeString(input)],
             expected,

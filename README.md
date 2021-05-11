@@ -173,7 +173,7 @@ new Session(options).start()
 ### Options
 
 ```typescript
-export interface ISessionOptions {
+export interface SessionOptions {
   /**
    * Pattern(s) to be included
    * @default "*"
@@ -237,7 +237,7 @@ export interface ISessionOptions {
   /**
    * Parameters for esifycss.plugin.
    */
-  esifycssPluginParameter?: IPluginOptions,
+  esifycssPluginParameter?: PluginOptions,
   /**
    * A stream where the runner outputs logs.
    * @default process.stdout
@@ -280,7 +280,7 @@ running `npm run build`.
 ### Options
 
 ```typescript
-export interface IPluginOptions {
+export interface PluginOptions {
   /**
    * When it is true, this plugin minifies classnames.
    * @default true
@@ -291,9 +291,9 @@ export interface IPluginOptions {
    * CSS files in multiple postcss processes, you should create an identifier
    * outside the processes and pass it as this value to keep the uniqueness
    * of mangled outputs.
-   * @default esifycss.createIdentifier()
+   * @default esifycss.createIdGenerator()
    */
-  identifier?: IIdentifier,
+  identifier?: IdGenerator,
   /**
    * Names starts with this value are not passed to mangler but replaced with
    * unprefixed names.
@@ -314,7 +314,7 @@ export interface IPluginOptions {
    * overwritten unexpectedly.
    * @default undefined
    */
-  mangler?: IPluginMangler,
+  mangler?: PluginMangler,
 }
 ```
 

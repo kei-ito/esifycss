@@ -1,12 +1,17 @@
 {
-    "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "outDir": "./lib"
-    },
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "src/helper/*.ts"
-    ]
+        "target": "esnext",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "removeComments": true,
+        "declaration": true,
+        "sourceMap": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
+    }
 }

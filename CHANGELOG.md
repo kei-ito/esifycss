@@ -197,7 +197,7 @@
 
 ### Code Refactoring
 
-- add IStringLiteral (c9d2752)
+- add StringLiteral (c9d2752)
 
 
 ## v1.4.6 (2020-01-21)

@@ -1,7 +1,7 @@
 import test from 'ava';
 import {parseCSSModuleScript} from './parseCSSModuleScript';
 
-interface ITest {
+interface Test {
     input: {
         title: string,
         code: string,
@@ -224,7 +224,7 @@ interface ITest {
             ],
         },
     },
-] as Array<ITest>).forEach(({input, expected}, index) => {
+] as Array<Test>).forEach(({input, expected}, index) => {
     test(`#${index} ${input.title}${expected ? '' : ' → Error'}`, (t) => {
         if (expected) {
             const actual = parseCSSModuleScript(input);

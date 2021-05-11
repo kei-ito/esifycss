@@ -1,6 +1,6 @@
 import * as path from 'path';
 import type * as postcss from 'postcss';
-import type {IEsifyCSSResult} from '../postcssPlugin/types';
+import type {EsifyCSSResult} from '../postcssPlugin/types';
 
 const getCSS = (
     node: postcss.ChildNode,
@@ -21,7 +21,7 @@ export const generateScript = (
         /** Path to the helperScript which is required to get a relative path to the helper script. */
         helper: string,
         /** The main contents of the output script. */
-        result: IEsifyCSSResult,
+        result: EsifyCSSResult,
         /** The root node will be splitted into rules that can be passed to insertRule. */
         root: postcss.Root,
         cssKey: string,

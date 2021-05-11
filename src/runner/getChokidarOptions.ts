@@ -1,10 +1,10 @@
 import type {WatchOptions} from 'chokidar';
-import type {ISessionOptions, IReadonlyWatchOptions} from './types';
+import type {SessionOptions, ReadonlyWatchOptions} from './types';
 import {ensureArray} from '../util/ensureArray';
 
 export const getChokidarOptions = (
-    parameters: ISessionOptions,
-): IReadonlyWatchOptions => {
+    parameters: SessionOptions,
+): ReadonlyWatchOptions => {
     const options: WatchOptions = {
         ...parameters.chokidar,
         ignoreInitial: false,

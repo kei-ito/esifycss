@@ -1,10 +1,10 @@
 import * as fs from 'fs';
-import type {ICSSParserParameters, ICSSParserConfigurations} from './types';
+import type {CSSParserParameters, CSSParserConfigurations} from './types';
 const {readFile} = fs.promises;
 
 export const getCSSParserConfiguration = async (
-    parameters: ICSSParserParameters,
-): Promise<ICSSParserConfigurations> => ({
+    parameters: CSSParserParameters,
+): Promise<CSSParserConfigurations> => ({
     css: `${parameters.css || await readFile(parameters.file)}`,
     plugins: parameters.plugins,
     options: {

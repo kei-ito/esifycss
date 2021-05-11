@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import * as path from 'path';
 import * as fs from 'fs';
+import * as console from 'console';
 import * as commander from 'commander';
-import {write} from '../util/write';
 import {Session} from '../runner/Session.js';
 import {loadParameters} from './loadParameters';
 
@@ -21,13 +21,13 @@ export const program = new commander.Command()
 .option('--noMangle', 'Keep the original name for debugging.')
 .option('--watch', 'Watch files and update the modules automatically.')
 .action(async (include: Array<string>, options) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     await new Session(await loadParameters(include, options)).start();
 });
 
 if (require.main === module) {
-    program.parseAsync()
-    .catch((error: Error) => {
-        write(process.stderr, [error]);
+    program.parseAsync().catch((error: unknown) => {
+        console.error(error);
         process.exit(1);
     });
 }

@@ -1,97 +1,96 @@
 import type * as acorn from 'acorn';
 
-export type NodeType =
-'ArrayExpression' | 'ArrayPattern' | 'ArrowFunctionExpression' | 'AssignmentExpression' | 'AssignmentPattern' | 'AwaitExpression' | 'BinaryExpression' | 'BlockStatement' | 'BreakStatement' | 'CallExpression' | 'CatchClause' | 'ClassBody' | 'ClassDeclaration' | 'ClassExpression' | 'ConditionalExpression' | 'ContinueStatement' | 'DebuggerStatement' | 'DoWhileStatement' | 'EmptyStatement' | 'ExportAllDeclaration' | 'ExportDefaultDeclaration' | 'ExportNamedDeclaration' | 'ExportSpecifier' | 'ExpressionStatement' | 'ForInStatement' | 'ForOfStatement' | 'ForStatement' | 'FunctionDeclaration' | 'FunctionExpression' | 'Identifier' | 'IfStatement' | 'ImportDeclaration' | 'ImportDefaultSpecifier' | 'ImportNamespaceSpecifier' | 'ImportSpecifier' | 'LabeledStatement' | 'Literal' | 'LogicalExpression' | 'MemberExpression' | 'MetaProperty' | 'MethodDefinition' | 'NewExpression' | 'ObjectExpression' | 'ObjectPattern' | 'ParenthesizedExpression' | 'Program' | 'Property' | 'RestElement' | 'ReturnStatement' | 'SequenceExpression' | 'SpreadElement' | 'Super' | 'SwitchCase' | 'SwitchStatement' | 'TaggedTemplateExpression' | 'TemplateElement' | 'TemplateLiteral' | 'ThisExpression' | 'ThrowStatement' | 'TryStatement' | 'UnaryExpression' | 'UpdateExpression' | 'VariableDeclaration' | 'VariableDeclarator' | 'WhileStatement' | 'WithStatement' | 'YieldExpression';
+export type NodeType = 'ArrayExpression' | 'ArrayPattern' | 'ArrowFunctionExpression' | 'AssignmentExpression' | 'AssignmentPattern' | 'AwaitExpression' | 'BinaryExpression' | 'BlockStatement' | 'BreakStatement' | 'CallExpression' | 'CatchClause' | 'ClassBody' | 'ClassDeclaration' | 'ClassExpression' | 'ConditionalExpression' | 'ContinueStatement' | 'DebuggerStatement' | 'DoWhileStatement' | 'EmptyStatement' | 'ExportAllDeclaration' | 'ExportDefaultDeclaration' | 'ExportNamedDeclaration' | 'ExportSpecifier' | 'ExpressionStatement' | 'ForInStatement' | 'ForOfStatement' | 'ForStatement' | 'FunctionDeclaration' | 'FunctionExpression' | 'Identifier' | 'IfStatement' | 'ImportDeclaration' | 'ImportDefaultSpecifier' | 'ImportNamespaceSpecifier' | 'ImportSpecifier' | 'LabeledStatement' | 'Literal' | 'LogicalExpression' | 'MemberExpression' | 'MetaProperty' | 'MethodDefinition' | 'NewExpression' | 'ObjectExpression' | 'ObjectPattern' | 'ParenthesizedExpression' | 'Program' | 'Property' | 'RestElement' | 'ReturnStatement' | 'SequenceExpression' | 'SpreadElement' | 'Super' | 'SwitchCase' | 'SwitchStatement' | 'TaggedTemplateExpression' | 'TemplateElement' | 'TemplateLiteral' | 'ThisExpression' | 'ThrowStatement' | 'TryStatement' | 'UnaryExpression' | 'UpdateExpression' | 'VariableDeclaration' | 'VariableDeclarator' | 'WhileStatement' | 'WithStatement' | 'YieldExpression';
 
-interface INode extends acorn.Node {
+interface Node extends acorn.Node {
     type: NodeType,
-    key?: IIdentifier,
-    value?: INode | boolean | number | string | null,
+    key?: Identifier,
+    value?: Node | boolean | number | string | null,
 }
 
-interface ILiteral extends INode {
+interface Literal extends Node {
     type: 'Literal',
     raw: string,
     value: boolean | number | string | null,
 }
 
-interface IStringLiteral extends ILiteral {
+interface StringLiteral extends Literal {
     value: string,
 }
 
-interface IIdentifier extends INode {
+interface Identifier extends Node {
     type: 'Identifier',
     name: string,
 }
 
-interface ICallExpression extends INode {
+interface CallExpression extends Node {
     type: 'CallExpression',
-    callee?: IIdentifier,
-    arguments: Array<INode>,
+    callee?: Identifier,
+    arguments: Array<Node>,
 }
 
-interface IExpressionStatement extends INode {
+interface ExpressionStatement extends Node {
     type: 'ExpressionStatement',
-    expression: ICallExpression,
+    expression: CallExpression,
 }
 
-interface IImportSpecifier extends INode {
+interface ImportSpecifier extends Node {
     type: 'ImportSpecifier',
-    imported: IIdentifier,
-    local: IIdentifier,
+    imported: Identifier,
+    local: Identifier,
 }
 
-interface IImportDeclaration extends INode {
+interface ImportDeclaration extends Node {
     type: 'ImportDeclaration',
-    specifiers: Array<IImportSpecifier>,
-    source: IStringLiteral,
+    specifiers: Array<ImportSpecifier>,
+    source: StringLiteral,
 }
 
-interface IVariableDeclarator extends INode {
+interface VariableDeclarator extends Node {
     type: 'VariableDeclaration',
-    id: IIdentifier,
+    id: Identifier,
 }
 
-interface IVariableDeclaration extends INode {
+interface VariableDeclaration extends Node {
     type: 'VariableDeclaration',
-    declarations: Array<IVariableDeclarator>,
+    declarations: Array<VariableDeclarator>,
 }
 
-interface IFunctionDeclaration extends INode {
+interface FunctionDeclaration extends Node {
     type: 'FunctionDeclaration',
-    id: IIdentifier,
+    id: Identifier,
 }
 
-interface IMemberExpression extends INode {
+interface MemberExpression extends Node {
     type: 'MemberExpression',
-    key: IIdentifier,
-    value: INode,
+    key: Identifier,
+    value: Node,
 }
 
-interface IObjectExpression extends INode {
+interface ObjectExpression extends Node {
     type: 'ObjectExpression',
-    properties: Array<IMemberExpression>,
+    properties: Array<MemberExpression>,
 }
 
-interface IArrayExpression extends INode {
+interface ArrayExpression extends Node {
     type: 'ArrayExpression',
-    elements: Array<INode>,
+    elements: Array<Node>,
 }
 
-interface IProgram extends INode {
+interface Program extends Node {
     type: 'Program',
-    body: Array<IExpressionStatement | IFunctionDeclaration | IImportDeclaration | IVariableDeclaration>,
+    body: Array<ExpressionStatement | FunctionDeclaration | ImportDeclaration | VariableDeclaration>,
 }
 
-export interface IVisitors {
-    ImportDeclaration?: (node: IImportDeclaration) => void,
-    ExpressionStatement?: (node: IExpressionStatement) => void,
-    ObjectExpression?: (node: IObjectExpression) => void,
+interface Visitors {
+    ImportDeclaration?: (node: ImportDeclaration) => void,
+    ExpressionStatement?: (node: ExpressionStatement) => void,
+    ObjectExpression?: (node: ObjectExpression) => void,
 }
 
 export const simple: (
     ast: acorn.Node,
-    visitors: IVisitors,
+    visitors: Visitors,
 ) => void;
 
 export const base: Record<string, () => void>;

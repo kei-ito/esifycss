@@ -1,5 +1,5 @@
 import test from 'ava';
-import {createIdentifier} from './createIdentifier';
+import {createIdentifier} from './createIdGenerator';
 
 test('#0 without listener', (t) => {
     const identifier = createIdentifier();

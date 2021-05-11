@@ -2,7 +2,7 @@ import test from 'ava';
 import * as postcss from 'postcss';
 import {minify} from './minify';
 
-interface ITest {
+interface Test {
     css: string,
     expected: string,
 }
@@ -25,7 +25,7 @@ interface ITest {
             '.foo #bar>div{foo:bar;bar:"foo"}',
         ].join(''),
     },
-] as Array<ITest>).forEach(({css, expected}, index) => {
+] as Array<Test>).forEach(({css, expected}, index) => {
     test(`#${index + 1} ${expected}`, (t) => {
         const root = minify(postcss.parse(css));
         t.is(root.toString(), expected);

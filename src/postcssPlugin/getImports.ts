@@ -1,12 +1,12 @@
 import type * as postcss from 'postcss';
 import {parseImport} from './parseImport';
-import type {IImports} from './types';
+import type {Imports} from './types';
 
 export const getImports = (
     root: postcss.Root,
     id: string,
-): IImports => {
-    const imports: IImports = new Map();
+): Imports => {
+    const imports: Imports = new Map();
     root.walkAtRules((rule) => {
         const {name} = rule;
         if (name === 'import') {

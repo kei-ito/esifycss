@@ -1,4 +1,4 @@
-import type {ISessionConfiguration, ISessionOptions} from './types';
+import type {SessionConfiguration, SessionOptions} from './types';
 import {plugin} from '../postcssPlugin/plugin';
 import {ensureArray} from '../util/ensureArray';
 import {getChokidarOptions} from './getChokidarOptions';
@@ -7,8 +7,8 @@ import {getExtensionOption} from './getExtensionOption';
 import {getIncludePatterns} from './getIncludePatterns';
 
 export const getSessionConfiguration = (
-    parameters: ISessionOptions,
-): ISessionConfiguration => {
+    parameters: SessionOptions,
+): SessionConfiguration => {
     const include = getIncludePatterns({
         include: ensureArray(parameters.include || '*'),
         extensions: parameters.extensions || ['.css'],

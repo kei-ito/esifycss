@@ -1,9 +1,9 @@
 import {writeFilep} from '../util/writeFilep';
 import {parseScripts} from './parseScripts';
-import type {IScriptData} from './types';
+import type {ScriptData} from './types';
 
 export const minifyScriptForCSS = async (
-    [file, data]: [string, IScriptData],
+    [file, data]: [string, ScriptData],
 ) => {
     const cssList: Array<string> = [];
     let code = data.script;

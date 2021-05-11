@@ -1,7 +1,7 @@
 import test from 'ava';
 import {getIncludePatterns} from './getIncludePatterns';
 
-interface ITest {
+interface Test {
     input: Parameters<typeof getIncludePatterns>,
     expected: ReturnType<typeof getIncludePatterns>,
 }
@@ -14,7 +14,7 @@ interface ITest {
         input: [{include: ['aaa.test'], extensions: ['.css', '.scss']}],
         expected: ['aaa.test/**/*.css', 'aaa.test/**/*.scss'],
     },
-] as Array<ITest>).forEach(({input, expected}, index) => {
+] as Array<Test>).forEach(({input, expected}, index) => {
     test(`#${index} ${JSON.stringify(input)} → ${expected}`, (t) => {
         t.deepEqual(getIncludePatterns(...input), expected);
     });

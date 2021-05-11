@@ -3,14 +3,14 @@ import * as vm from 'vm';
 import * as rollup from 'rollup';
 import * as postcss from 'postcss';
 import {createSandbox} from '../util/createSandbox.for-test';
-import type {IEsifyCSSResult} from '../postcssPlugin/types';
+import type {EsifyCSSResult} from '../postcssPlugin/types';
 import {writeFilep} from './writeFilep';
 
-export interface IRunCodeResult extends IEsifyCSSResult {
+export interface RunCodeResult extends EsifyCSSResult {
     root: postcss.Root,
 }
 
-export const runCode = async (file: string): Promise<IRunCodeResult> => {
+export const runCode = async (file: string): Promise<RunCodeResult> => {
     const testCodePath = `${file}-import.js`;
     await writeFilep(testCodePath, `import * as imported from './${path.basename(file)}';exports = imported;`);
     const bundle = await rollup.rollup({input: testCodePath});
@@ -22,7 +22,7 @@ export const runCode = async (file: string): Promise<IRunCodeResult> => {
             throw new Error(`Unexpected multiple outputs: ${JSON.stringify(undef, null, 2)}`);
         }
     }
-    const sandbox = createSandbox<IEsifyCSSResult>();
+    const sandbox = createSandbox<EsifyCSSResult>();
     vm.runInNewContext(output.code, sandbox);
     const {exports: {className = {}, id = {}, keyframes = {}}} = sandbox;
     return {className, id, keyframes, root: postcss.parse(sandbox.document.css)};

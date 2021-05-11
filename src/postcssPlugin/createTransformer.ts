@@ -1,5 +1,5 @@
 import type * as postcss from 'postcss';
-import type {IPluginConfiguration, IEsifyCSSResult} from './types';
+import type {PluginConfiguration, EsifyCSSResult} from './types';
 import {transformDeclarations} from './transformDeclarations';
 import {getImports} from './getImports';
 import {minify} from './minify';
@@ -9,14 +9,14 @@ import {removeImportsAndRaws} from './removeImportsAndRaws';
 import {normalizePath} from '../util/normalizePath';
 
 export const createTransformer = (
-    {mangler, rawPrefix}: IPluginConfiguration,
+    {mangler, rawPrefix}: PluginConfiguration,
 ) => async (
     root: postcss.Root,
     result: postcss.Result,
-): Promise<IEsifyCSSResult> => {
+): Promise<EsifyCSSResult> => {
     const id = normalizePath(result.opts.from || Date.now().toString(36));
     const imports = getImports(root, id);
-    const transformResult: IEsifyCSSResult = {
+    const transformResult: EsifyCSSResult = {
         ...(await mangleIdentifiers({id, root, mangler, imports, rawPrefix})),
         keyframes: mangleKeyFrames({id, root, mangler, imports, rawPrefix}),
     };

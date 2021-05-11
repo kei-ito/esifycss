@@ -1,16 +1,16 @@
 import type {
-    IPluginOptions,
-    IPluginConfiguration,
-    IPluginMangler,
+    PluginOptions,
+    PluginConfiguration,
+    PluginMangler,
 } from './types';
-import {createIdentifier} from '../util/createIdentifier';
+import {createIdentifier} from '../util/createIdGenerator';
 
 export const getPluginMangler = (
     {
         mangle = true,
         identifier = createIdentifier(),
-    }: IPluginOptions,
-): IPluginMangler => {
+    }: PluginOptions,
+): PluginMangler => {
     if (mangle) {
         return (id, type, name) => `_${identifier(`${id}-${type}-${name}`).toString(36)}`;
     } else {
@@ -19,8 +19,8 @@ export const getPluginMangler = (
 };
 
 export const getPluginConfiguration = (
-    parameters: IPluginOptions = {},
-): IPluginConfiguration => ({
+    parameters: PluginOptions = {},
+): PluginConfiguration => ({
     mangler: parameters.mangler || getPluginMangler(parameters),
     rawPrefix: parameters.rawPrefix || 'raw-',
 });

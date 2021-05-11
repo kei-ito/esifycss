@@ -1,8 +1,8 @@
 import test from 'ava';
 import {encodeString, decodeString} from './encodeString';
-import {createIdentifier} from './createIdentifier';
+import {createIdentifier} from './createIdGenerator';
 
-interface ITest {
+interface Test {
     input: string,
     preset?: Array<string>,
     expected: string,
@@ -26,7 +26,7 @@ interface ITest {
         expected: 'ECACACACA',
         expectedWords: ['foo', ' ', 'bar'],
     },
-] as Array<ITest>).forEach(({input, preset, expected, expectedWords}, index) => {
+] as Array<Test>).forEach(({input, preset, expected, expectedWords}, index) => {
     test(`#${index} ${JSON.stringify(input)} ${JSON.stringify(preset || [])} → ${expected}`, (t) => {
         const identifier = createIdentifier();
         if (preset) {

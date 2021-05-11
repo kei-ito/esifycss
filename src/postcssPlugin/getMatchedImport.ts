@@ -1,9 +1,9 @@
-import type {IImports} from './types';
+import type {Imports} from './types';
 import {normalizePath} from '../util/normalizePath';
 
 export const getMatchedImport = (
     value: string,
-    imports: IImports,
+    imports: Imports,
 ): {key: string, from: string} | null => {
     const normalized = normalizePath(value);
     for (const [name, from] of imports) {

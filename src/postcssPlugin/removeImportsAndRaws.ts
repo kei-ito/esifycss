@@ -1,19 +1,19 @@
-import type {IImports, IEsifyCSSResult, IIdentifierMap} from './types';
+import type {Imports, EsifyCSSResult, IdentifierMap} from './types';
 import {getMatchedImport} from './getMatchedImport';
 
 export const removeImportsAndRaws = (
     {result: maps, imports, rawPrefix}: {
-        result: IEsifyCSSResult,
-        imports: IImports,
+        result: EsifyCSSResult,
+        imports: Imports,
         rawPrefix: string,
     },
-): IEsifyCSSResult => {
+): EsifyCSSResult => {
     const isLocalTransformedIdentifier = (key: string): boolean => {
         return !key.startsWith(rawPrefix) && !getMatchedImport(key, imports);
     };
-    const filter = (map: IIdentifierMap): IIdentifierMap => Object.keys(map)
+    const filter = (map: IdentifierMap): IdentifierMap => Object.keys(map)
     .filter(isLocalTransformedIdentifier)
-    .reduce<IIdentifierMap>(
+    .reduce<IdentifierMap>(
         (result, key) => {
             result[key] = map[key];
             return result;

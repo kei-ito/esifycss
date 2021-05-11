@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import {createOptimizedIdentifier} from './createOptimizedIdentifier';
+import {createOptimizedIdGenerator} from './createOptimizedIdGenerator';
 import {parseScripts} from './parseScripts';
 import {minifyCSSInScript} from './minifyCSSInScript';
 import {setDictionary} from './setDictionary';
@@ -14,7 +14,7 @@ export const minifyScripts = async (
     },
 ): Promise<void> => {
     const parseResult = await parseScripts(props);
-    const identifier = createOptimizedIdentifier(parseResult.tokens);
+    const identifier = createOptimizedIdGenerator(parseResult.tokens);
     await Promise.all([...parseResult.scripts].map(async ([file, {script, ranges}]) => {
         const minified = minifyCSSInScript(script, ranges, identifier);
         await writeFilep(file, minified);

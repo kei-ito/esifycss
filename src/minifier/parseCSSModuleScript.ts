@@ -1,6 +1,6 @@
 import * as acorn from 'acorn';
 import * as acornWalk from './walker';
-import type {IParseResult, ICSSRange, IRange} from './types';
+import type {ParseResult, CSSRange, Range} from './types';
 import {extractCSSFromArrayExpression} from './extractCSSFromArrayExpression';
 
 export const parseCSSModuleScript = (
@@ -9,9 +9,9 @@ export const parseCSSModuleScript = (
         cssKey: string,
         ecmaVersion?: 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020,
     },
-): IParseResult => {
-    const ranges: Array<ICSSRange> = [];
-    const statements: Array<IRange> = [];
+): ParseResult => {
+    const ranges: Array<CSSRange> = [];
+    const statements: Array<Range> = [];
     const ast = acorn.parse(
         props.code,
         {

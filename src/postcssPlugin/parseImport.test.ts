@@ -1,7 +1,7 @@
 import test from 'ava';
 import {parseImport} from './parseImport';
 
-interface ITest {
+interface Test {
     input: Parameters<typeof parseImport>,
     expected: ReturnType<typeof parseImport>,
 }
@@ -44,7 +44,7 @@ interface ITest {
         input: ['""./foo.css" x', 'bar/input.css'],
         expected: null,
     },
-] as Array<ITest>).forEach(({input, expected}, index) => {
+] as Array<Test>).forEach(({input, expected}, index) => {
     test(`#${index + 1} ${input[0]}`, (t) => {
         t.deepEqual(parseImport(...input), expected);
     });

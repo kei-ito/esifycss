@@ -1,4 +1,3 @@
-/// <reference path="./browserstack-local.d.ts"/>
 import type {TestInterface} from 'ava';
 import anyTest from 'ava';
 import {URL} from 'url';

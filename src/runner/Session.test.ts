@@ -5,19 +5,19 @@ import anyTest from 'ava';
 import type * as postcss from 'postcss';
 import * as scss from 'postcss-scss';
 import * as parser from '@hookun/parse-animation-shorthand';
-import type {ISessionOptions} from './types';
+import type {SessionOptions} from './types';
 import {Session} from './Session';
 import {createTemporaryDirectory} from '../util/createTemporaryDirectory';
-import type {IRunCodeResult} from '../util/runCode.for-test';
+import type {RunCodeResult} from '../util/runCode.for-test';
 import {runCode} from '../util/runCode.for-test';
 import {writeFilep} from '../util/writeFilep';
 
-interface ITestContext {
+interface TestContext {
     directory: string,
     session?: Session,
 }
 
-const test = anyTest as TestInterface<ITestContext>;
+const test = anyTest as TestInterface<TestContext>;
 
 test.beforeEach(async (t) => {
     t.context.directory = await createTemporaryDirectory();
@@ -29,14 +29,14 @@ test.afterEach(async (t) => {
     }
 });
 
-interface ITest {
-    parameters: Partial<ISessionOptions>,
+interface Test {
+    parameters: Partial<SessionOptions>,
     files: Array<{
         path: string,
         content: Array<string>,
         test: (
-            t: ExecutionContext<ITestContext>,
-            result: IRunCodeResult,
+            t: ExecutionContext<TestContext>,
+            result: RunCodeResult,
         ) => void,
     }>,
 }
@@ -166,7 +166,7 @@ interface ITest {
             },
         ],
     },
-] as Array<ITest>).forEach(({parameters, files}, index) => {
+] as Array<Test>).forEach(({parameters, files}, index) => {
     test.serial(`#${index}`, async (t) => {
         await Promise.all(files.map(async (file) => {
             const filePath = path.join(t.context.directory, file.path);

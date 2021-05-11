@@ -1,13 +1,11 @@
 import * as BrowserStack from 'browserstack-local';
 
-interface IParameters {
-    accessKey: string,
-    port: number,
-    localIdentifier: string,
-}
-
 export const createBrowserStackLocal = async (
-    parameters: IParameters,
+    parameters: {
+        accessKey: string,
+        port: number,
+        localIdentifier: string,
+    },
 ): Promise<BrowserStack.Local> => {
     const bsLocal = new BrowserStack.Local();
     await new Promise((resolve, reject) => {

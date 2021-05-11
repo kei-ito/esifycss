@@ -1,18 +1,18 @@
 import type * as postcss from 'postcss';
 import * as selectorParser from 'postcss-selector-parser';
-import type {IEsifyCSSResult, IImports, IPluginMangler} from './types';
+import type {EsifyCSSResult, Imports, PluginMangler} from './types';
 import {getMatchedImport} from './getMatchedImport';
 
 export const mangleIdentifiers = async (
     {id, root, mangler, imports, rawPrefix}: {
         id: string,
         root: postcss.Root,
-        mangler: IPluginMangler,
-        imports: IImports,
+        mangler: PluginMangler,
+        imports: Imports,
         rawPrefix: string,
     },
-): Promise<{id: IEsifyCSSResult['id'], className: IEsifyCSSResult['className']}> => {
-    const result: {id: IEsifyCSSResult['id'], className: IEsifyCSSResult['className']} = {
+): Promise<{id: EsifyCSSResult['id'], className: EsifyCSSResult['className']}> => {
+    const result: {id: EsifyCSSResult['id'], className: EsifyCSSResult['className']} = {
         id: {},
         className: {},
     };
