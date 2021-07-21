@@ -82,7 +82,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npx c8 npm test
       - run: npx c8 report --reporter=text-lcov > coverage.lcov
-      - uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v2
   TestClient:
     if: ${{ contains(github.ref, 'master') || contains(github.ref, 'tags/v') || github.event_name == 'pull_request' }}
     runs-on: ${{ matrix.os }}
